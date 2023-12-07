@@ -5,11 +5,15 @@ import {useFetchPostsQuery} from '../api';
 import {Post} from '../types';
 import {NativeStackScreenProps} from 'react-native-screens/native-stack';
 import {RootStackParamList} from '../../App';
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const PostListScreen = ({
   navigation,
 }: NativeStackScreenProps<RootStackParamList>) => {
   const {data, isLoading} = useFetchPostsQuery();
+  const {darkMode} = useSelector((state: RootState) => state.colorScheme);
+
 
   const showDetails = (postId: number) => {
     navigation.navigate('PostDetails', {postId});
@@ -23,8 +27,8 @@ const PostListScreen = ({
           <TouchableOpacity
             style={styles.item}
             onPress={() => showDetails(item.id)}>
-            <Text style={styles.title}>{item?.title}</Text>
-            <Text style={styles.body} numberOfLines={2}>
+            <Text style={[styles.title, {color: darkMode ? '#f1f5f9' : '#1e293b'}]}>{item?.title}</Text>
+            <Text style={[styles.body, {color: darkMode ? '#cbd5e1' : '#334155'}]} numberOfLines={2}>
               {item?.body}
             </Text>
           </TouchableOpacity>

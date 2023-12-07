@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 8,
     fontSize: 16,
-    backgroundColor: '#d1d5db',
     borderRadius: 5,
   },
   commentHeaderContainer: {

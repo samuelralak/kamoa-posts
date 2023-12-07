@@ -1,6 +1,8 @@
 import {Appearance, ColorSchemeName} from 'react-native';
 import {createSlice} from '@reduxjs/toolkit';
 
+
+
 interface ColorSchemeState {
   darkMode: boolean;
   colorScheme: ColorSchemeName;
