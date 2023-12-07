@@ -1,8 +1,9 @@
 import React, {ReactNode} from 'react';
-import {StatusBar, useColorScheme, View} from 'react-native';
-
+import {StatusBar, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Loader from './Loader';
+import {RootState} from '../store';
+import {useSelector} from 'react-redux';
 
 const AppView = ({
   isLoading,
@@ -11,10 +12,9 @@ const AppView = ({
   isLoading?: boolean;
   children: ReactNode;
 }) => {
-  const isDarkMode = useColorScheme() === 'dark';
-
+  const {darkMode} = useSelector((state: RootState) => state.colorScheme);
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: darkMode ? Colors.darker : Colors.lighter,
   };
 
   if (isLoading) {
@@ -24,10 +24,9 @@ const AppView = ({
   return (
     <View style={backgroundStyle}>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        barStyle={darkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-
       {children}
     </View>
   );
